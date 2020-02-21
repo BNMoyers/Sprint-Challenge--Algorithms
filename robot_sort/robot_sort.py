@@ -81,11 +81,13 @@ class SortingRobot:
         Turn on the robot's light
         """
         self._light = "ON"
+
     def set_light_off(self):
         """
         Turn off the robot's light
         """
         self._light = "OFF"
+
     def light_is_on(self):
         """
         Returns True if the robot's light is on and False otherwise.
@@ -96,15 +98,50 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        # use cocktail sort; like bubble sort, but works both left and right; is quicker than bubble sort.
+        #
+        # Instead of using the light to terminate the loop, use break statements; use the light to decide whether you move left or right.
+
+        while True:
+            # pick up the item at the current location
+            self.swap_item()
+            # check whether the light is on to determine which direction the robot should move: left if the light is on, right if it's off
+            if self.light_is_on() is True:
+                # compare the held item to the one in front of the robot; swap if the held item is bigger.
+                if self.compare_item() == 1:
+                    # held item is bigger
+                    self.swap_item()
+                if self.compare_item() == None:
+                    #doesn't get smaller than this; drop the item and move back the other way.
+                    self.swap_item()
+                    self.set_light_off()
+                else:
+                    self.move_left()
+                    # held item is smaller, move to the left
+
+            else:
+                if self.compare_item() == -1:
+                    # held item is smaller; swap it
+                    self.swap_item()
+
+                # check if we're at the end of the list; if not, move right
+                if self.can_move_right():
+                    self.move_right()
+                else:
+                    self.swap_item()
+                    # if there isn't another item to check, then we're done.
+                    if self.compare_item() == None:
+                        break
+                    # otherwise, flip the light
+                    self.set_light_on()
 
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
     # with `python robot_sort.py`
 
-    l = [15, 41, 58, 49, 26, 4, 28, 8, 61, 60, 65, 21, 78, 14, 35, 90, 54, 5, 0, 87, 82, 96, 43, 92, 62, 97, 69, 94, 99, 93, 76, 47, 2, 88, 51, 40, 95, 6, 23, 81, 30, 19, 25, 91, 18, 68, 71, 9, 66, 1, 45, 33, 3, 72, 16, 85, 27, 59, 64, 39, 32, 24, 38, 84, 44, 80, 11, 73, 42, 20, 10, 29, 22, 98, 17, 48, 52, 67, 53, 74, 77, 37, 63, 31, 7, 75, 36, 89, 70, 34, 79, 83, 13, 57, 86, 12, 56, 50, 55, 46]
+    l = [15, 41, 58, 49, 26, 4, 28, 8, 61, 60, 65, 21, 78, 14, 35, 90, 54, 5, 0, 87, 82, 96, 43, 92, 62, 97, 69, 94, 99, 93, 76, 47, 2, 88, 51, 40, 95, 6, 23, 81, 30, 19, 25, 91, 18, 68, 71, 9, 66, 1,
+         45, 33, 3, 72, 16, 85, 27, 59, 64, 39, 32, 24, 38, 84, 44, 80, 11, 73, 42, 20, 10, 29, 22, 98, 17, 48, 52, 67, 53, 74, 77, 37, 63, 31, 7, 75, 36, 89, 70, 34, 79, 83, 13, 57, 86, 12, 56, 50, 55, 46]
 
     robot = SortingRobot(l)
 
