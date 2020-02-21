@@ -26,3 +26,5 @@ Does it break? If so, then this floor becomes our new highest floor.
 Does it stay unbroken? If so, this is our new bottom floor.
 
 Now we just repeat the process until we narrow down to a single floor!
+
+The runtime complexity of this algorithm is O(logn), because each iteration divides the remainder in half.
