@@ -16,3 +16,13 @@ c)O(n)
 ## Exercise II
 
 
+This problem requires a classic 'divide and conquer' strategy. 
+
+The ground floor of the building is our lowest floor. The top floor is our highest floor. We find the difference, and then go to the middlemost floor.
+
+Once on the middle floor, we drop an egg to test whether it breaks. 
+
+Does it break? If so, then this floor becomes our new highest floor.
+Does it stay unbroken? If so, this is our new bottom floor.
+
+Now we just repeat the process until we narrow down to a single floor!
